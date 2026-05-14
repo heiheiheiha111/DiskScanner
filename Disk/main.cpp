@@ -1,4 +1,5 @@
 #include "Scanner.h"
+#include "SearchEngine.h"
 #include <iostream>
 #include <iomanip>
 using namespace std;
@@ -13,15 +14,10 @@ int main()
 
 	auto files = scanner.scan(path);
 
-	for (const auto& file : files)
-	{
-		cout << "名称：" << file.name << endl;
-		
-		cout << "路径：" << file.path<< endl;
-		cout << fixed << setprecision(2);
-		cout << "大小：" << file.size/1024.0/1024.0 <<"MB"<< endl;
-
-		cout << "-----------------------" << endl;
-	}
+	SearchEngine engine;
+	string keyword;
+	cout << "请输入关键词";
+	getline(cin, keyword);
+	vector<FileInfo> result = engine.search(files, keyword);
 	return 0;
 }
